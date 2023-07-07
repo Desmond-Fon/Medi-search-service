@@ -1,3 +1,29 @@
 .custom-shadow {
   box-shadow: 0px 3px 30px 0px rgba(0, 0, 0, 0.03);
 }
+
+.shadoww{
+  border-right: 1px solid #E8E8E8;
+background: #FFF;
+
+/* Drop_1 */
+box-shadow: 0px 20px 50px 0px rgba(220, 224, 249, 0.50);
+}
+
+.search{
+  border-radius: 12px;
+border: 1px solid #ECEEF6;
+background: #FFF;
+
+/* Shadow */
+box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.05);
+}
+
+.details{
+  border-radius: 12px;
+border: 2px solid #4762FF;
+background: #FFF;
+
+/* Drop_1 */
+box-shadow: 0px 20px 50px 0px rgba(220, 224, 249, 0.50);
+}
