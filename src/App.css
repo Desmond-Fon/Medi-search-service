@@ -27,3 +27,8 @@ background: #FFF;
 /* Drop_1 */
 box-shadow: 0px 20px 50px 0px rgba(220, 224, 249, 0.50);
 }
+
+
+.map-container {
+height: 100vh;
+}

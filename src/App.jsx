@@ -4,6 +4,8 @@ import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Overview from "./pages/dashboard/overview";
 import Tracking from "./pages/dashboard/tracking";
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 function App() {
 
