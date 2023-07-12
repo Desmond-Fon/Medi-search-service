@@ -1,27 +1,38 @@
+/* eslint-disable react/prop-types */
 // import React from "react";
 import GoogleMapReact from 'google-map-react';
 import boldMap from '../../../../assets/boldMap.svg'
 import message from '../../../../assets/Messages.png'
-import { useEffect, useState } from 'react'
+import locationn from '../../../../assets/locationn.svg'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
-
+import { DataContext } from '../../../../contexts/Data';
 
 
 // eslint-disable-next-line react/prop-types
-const AnyReactComponent = ({ text }) => <div><img src={boldMap} alt='' className='h-7' /><p className='text-bold text-red-400 text-[14px] bg-white w-fit px-2 py-1 rounded-md'>{text}</p></div>;
+const AnyReactComponent = ({ text }) => <div><img src={locationn} alt='' className='h-7' /><p className='text-bold text-green-400 text-[14px] bg-white w-fit px-2 py-1 rounded-md'>{text}</p></div>;
 // eslint-disable-next-line react/prop-types
-const HospitalComponent = ({ text }) => <div><img src={message} alt='' className='h-4' /> <p className='text-bold text-green-400 text-[12px] bg-white w-fit px-2 py-1 rounded-md'>{text}</p></div>;
+
 
 export default function SimpleMap() {
-    const [userLocation, setUserLocation] = useState(null)
+    const { userLocation } = useContext(DataContext);
+
     const [hospitals, setHospitals] = useState(null)
+
+
+
+    // console.log(isHovering)
+
+    let location = JSON.parse(localStorage.getItem('userLocation'));
+    // console.log(location);
+    // console.log(localStorage.getItem('userLocation'));
 
     const defaultProps = {
         center: {
-            lat:  9.94108,
-            lng: 8.86918,
+            lat: location.latitude,
+            lng: location.longitude,
         },
-        zoom: 15,
+        zoom: 14,
     };
 
     const mapOptions = {
@@ -34,71 +45,23 @@ export default function SimpleMap() {
             const response = await axios.get(
                 `https://overpass-api.de/api/interpreter?data=[out:json];node(around:5000,${latitude},${longitude})[amenity=hospital];out;`
             );
-            console.log(response.data.elements);
+            // console.log(response.data.elements);
             setHospitals(response.data.elements)
         } catch (error) {
             console.error(error);
         }
     };
 
-    console.log(hospitals)
+    // console.log(hospitals)
 
     useEffect(() => {
-        // Get the user's location using the Geolocation API or any other method
-        const userLatitude = 9.94108 // Example latitude
-        const userLongitude = 8.86918; // Example longitude
+        const userLatitude = location.latitude
+        const userLongitude = location.longitude;
         fetchNearbyHospitals(userLatitude, userLongitude);
-    }, []);
+    }, [location.latitude, location.longitude]);
 
-    // const fetchDataWithLocation = async () => {
-    //     try {
-    //         const position = await new Promise((resolve, reject) => {
-    //             navigator.geolocation.getCurrentPosition(resolve, reject);
-    //         });
-
-    //         const latitude = position.coords.latitude;
-    //         const longitude = position.coords.longitude;
-    //         console.log(latitude, longitude)
-
-    //         // Call your function with the obtained location parameters
-    //         fetchNearbyHospitals(latitude, longitude);
-    //     } catch (error) {
-    //         console.error(error);
-    //         // Handle any error that occurred during obtaining the user's location
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchDataWithLocation();
-    // }, []);
-
-
-
-
-    useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    console.log("Latitude is :", position.coords.latitude);
-                    console.log("Longitude is :", position.coords.longitude);
-                    const { latitude, longitude } = position.coords;
-                    setUserLocation({ latitude, longitude });
-                    // Get the user's location using the Geolocation API or any other method
-                    // const userLatitude = userLocation?.latitude; // Example latitude
-                    // const userLongitude = userLocation?.longitude; // Example longitude
-                    // fetchNearbyHospitals(userLatitude, userLongitude);
-                },
-                (error) => {
-                    console.error('Error getting user location:', error);
-                }
-            );
-        } else {
-            console.error('Geolocation is not supported by this browser');
-        }
-    }, []);
 
     return (
-        // Important! Always set the container height explicitly
         <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" }}
@@ -116,9 +79,43 @@ export default function SimpleMap() {
                         key={hospital.id}
                         lat={hospital.lat}
                         lng={hospital.lon}
-                        text={hospital.tags.name} />
+                        text={hospital.tags.name}
+                        hospital={hospital}
+                        />
                 ))}
             </GoogleMapReact>
         </div>
     );
+}
+
+const HospitalComponent = ({ text, hospital }) => {
+    const [isHovering, setIsHovering] = useState(false);
+    const { setShow, setData} = useContext(DataContext);
+
+    const handleMouseOver = () => {
+        // console.log('mouse over');
+        setIsHovering(true);
+    };
+
+    const handleShow = () => {
+        // console.log('click')
+        // console.log(hospital)
+        setData(hospital)
+        setShow(true)
+    }
+
+    // console.log(show)
+    // console.log(data)
+
+    const handleMouseOut = () => {
+        // console.log('mouse out');
+        setIsHovering(false);
+    };
+    return (<div>
+        <div onClick={handleShow
+        }>
+            <img src={boldMap} alt='' className='h-5 cursor-pointer' onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut} />
+        </div> {isHovering ? (<p className='text-bold text-blue-500 text-[12px] bg-white w-fit px-2 py-1 rounded-md'>{text}</p>) : ''}
+    </div>)
 }

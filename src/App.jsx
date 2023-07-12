@@ -5,26 +5,29 @@ import Dashboard from "./pages/dashboard";
 import Overview from "./pages/dashboard/overview";
 import Tracking from "./pages/dashboard/tracking";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { DataProvider } from "./contexts/Data";
 
 
 function App() {
 
   return (
     <>
-      <div>
-        <BrowserRouter>
-          {/* <Header /> */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+      <DataProvider>
+        <div>
+          <BrowserRouter>
+            {/* <Header /> */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
 
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route path="/dashboard/overview" element={<Overview />} />
-              <Route path="/dashboard/tracking" element={<Tracking />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="/dashboard/overview" element={<Overview />} />
+                <Route path="/dashboard/tracking" element={<Tracking />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </DataProvider>
     </>
   )
 }

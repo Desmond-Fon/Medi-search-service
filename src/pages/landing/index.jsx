@@ -1,7 +1,34 @@
 import Nav from "../../components/Nav";
 import map from '../../assets/mapp.png'
+import { DataContext } from "../../contexts/Data";
+import { useContext, useEffect } from "react";
+
 
 const Home = () => {
+    const { setUserLocation, userLocation } = useContext(DataContext);
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log("Latitude is :", position.coords.latitude);
+                    console.log("Longitude is :", position.coords.longitude);
+                    const { latitude, longitude } = position.coords;
+                    setUserLocation({ latitude, longitude });
+                    localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }))
+                },
+                (error) => {
+                    console.error('Error getting user location:', error);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser');
+        }
+    }, [setUserLocation]);
+
+
+    console.log(userLocation);
+
     return (<>
         <div>
             <Nav />
