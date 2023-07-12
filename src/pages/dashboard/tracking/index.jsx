@@ -11,6 +11,8 @@ import settings from '../../../assets/settings.svg'
 // import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'; 
 import 'leaflet/dist/leaflet.css'
 import MapComponent from './component/Map'
+import SimpleMap from './component/Gmap'
+import YMapsComponent from './component/YmapsComponent'
 
 // eslint-disable-next-line react/prop-types
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -69,7 +71,7 @@ const Tracking = () => {
 
     return (<>
         <div className="flex w-full  relative ">
-        <div className="absolute bg-white h-[100vh] flex justify-start items-center flex-col pt-[40px] px-[30px] bg-opacity-70 w-[33%] z-40">
+        {/* <div className="absolute bg-white h-[100vh] flex justify-start items-center flex-col pt-[40px] px-[30px] bg-opacity-30 w-[33%] z-40">
             <div className='w-full relative'>
                 <img src={search} alt="" className='absolute top-2 left-3 h-4' />
                 <input type="text" name="" id="" className='w-[100%] h-[35px] search pl-10 text-sm outline-none' placeholder='Search...' />
@@ -120,7 +122,7 @@ const Tracking = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
 
 
         <div className="w-[100%] z-10">
@@ -147,7 +149,9 @@ const Tracking = () => {
                         </Popup>
                     </Marker>
                 </MapContainer> */}
-                <MapComponent />
+                {/* <MapComponent /> */}
+                <SimpleMap />
+                {/* <YMapsComponent /> */}
             {/* </div> */}
             </div> 
         </div>

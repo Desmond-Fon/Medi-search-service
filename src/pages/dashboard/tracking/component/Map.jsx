@@ -13,8 +13,11 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVzMS1tYWlsYm94IiwiYSI6ImNsanZqMDFtNDBxNm4za
 
 const MapComponent = () => {
     const [map, setMap] = useState(null);
+    const [lat, setLat] = useState(9.94108);
+    const [lng, setLng] = useState(8.86918);
     const [userLocation, setUserLocation] = useState(null);
     const [hospitals, setHospitals] = useState([]);
+    const [hospitalMarkers, setHospitalMarkers] = useState([]);
 
     const mapContainerRef = useRef(null);
 
@@ -30,6 +33,7 @@ const MapComponent = () => {
                     console.error(error);
                 }
             );
+           
 
             // Initialize map
             const initializeMap = ({ setMap, mapContainer }) => {
@@ -49,6 +53,14 @@ const MapComponent = () => {
         }, [map, userLocation]);
 
     useEffect(() => {
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=hospital&key=AIzaSyCQcF7gWX6ljz1MSEiLBbrx11s1iv7FvVg`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => console.log(data));
+    }, [])
+
+    useEffect(() => {
         if (map && userLocation) {
             // Fetch nearby hospitals
             const fetchHospitals = async () => {
@@ -56,8 +68,27 @@ const MapComponent = () => {
                     const response = await axios.get(
                         `https://api.mapbox.com/geocoding/v5/mapbox.places/hospital.json?proximity=${userLocation[0]},${userLocation[1]}&access_token=${mapboxgl.accessToken}`
                     );
-                    console.log(response.data)
-                    setHospitals(response.data.features);
+                    // console.log(response.data);
+                    const hospitalsData = response.data.features;
+
+                    // Create map markers for hospitals
+                    const hospitalMarkers = hospitalsData.map(hospital => {
+                        const { center, place_name } = hospital;
+                        const [longitude, latitude] = center;
+
+                        const popup = new mapboxgl.Popup({ offset: 25 }).setText(place_name);
+
+                        const marker = new mapboxgl.Marker()
+                            .setLngLat([longitude, latitude])
+                            .setPopup(popup)
+                            .addTo(map);
+
+                        return marker;
+                    });
+
+                    // Set the hospitals and their markers in the state
+                    setHospitals(hospitalsData);
+                    setHospitalMarkers(hospitalMarkers);
                 } catch (error) {
                     console.error(error);
                 }
@@ -66,6 +97,7 @@ const MapComponent = () => {
             fetchHospitals();
         }
     }, [map, userLocation]);
+
 
     return (
         <div
