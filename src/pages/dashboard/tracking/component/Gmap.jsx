@@ -2,7 +2,7 @@
 // import React from "react";
 import GoogleMapReact from 'google-map-react';
 import boldMap from '../../../../assets/boldMap.svg'
-import message from '../../../../assets/Messages.png'
+// import message from '../../../../assets/Messages.png'
 import locationn from '../../../../assets/locationn.svg'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
@@ -32,7 +32,7 @@ export default function SimpleMap() {
             lat: location.latitude,
             lng: location.longitude,
         },
-        zoom: 14,
+        zoom: 11,
     };
 
     const mapOptions = {
@@ -43,9 +43,9 @@ export default function SimpleMap() {
     const fetchNearbyHospitals = async (latitude, longitude) => {
         try {
             const response = await axios.get(
-                `https://overpass-api.de/api/interpreter?data=[out:json];node(around:5000,${latitude},${longitude})[amenity=hospital];out;`
+                `https://overpass-api.de/api/interpreter?data=[out:json];node(around:15000,${latitude},${longitude})[amenity=hospital];out;`
             );
-            // console.log(response.data.elements);
+            console.log(response.data.elements);
             setHospitals(response.data.elements)
         } catch (error) {
             console.error(error);
