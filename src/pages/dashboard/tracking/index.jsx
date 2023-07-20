@@ -35,7 +35,7 @@ const Tracking = () => {
     // const userLongitude = JSON.parse(localStorage.getItem('userLocation')).latitude;
     const latDifference = data?.lat - userLatitude;
     // const lngDifference = data?.lng - userLongitude;
-    const displayNumber = latDifference < 0.01 && latDifference > - 0.02 ? randomNumber : Math.floor(Math.random() * 21) + 40;
+    const displayNumber = latDifference < 0.01 && latDifference > - 0.01 ? randomNumber : Math.floor(Math.random() * 21) + 40;
     // console.log(latDifference)
 
 

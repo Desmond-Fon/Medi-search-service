@@ -6,6 +6,7 @@ import Overview from "./pages/dashboard/overview";
 import Tracking from "./pages/dashboard/tracking";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { DataProvider } from "./contexts/Data";
+import Authenticate from "./pages/authentication";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <BrowserRouter>
             {/* <Header /> */}
             <Routes>
+              <Route path="/login" element={<Authenticate />} />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
 

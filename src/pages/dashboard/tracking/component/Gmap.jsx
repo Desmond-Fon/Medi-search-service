@@ -32,7 +32,7 @@ export default function SimpleMap() {
             lat: location.latitude,
             lng: location.longitude,
         },
-        zoom: 11,
+        zoom: 12,
     };
 
     const mapOptions = {
