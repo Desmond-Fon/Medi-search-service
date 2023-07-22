@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Auth } from "../../../firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import { DataContext } from "../../../contexts/Data";
 
 const SignIn = () => {
+    const { setUser, user } = useContext(DataContext);
     let navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -16,7 +18,10 @@ const SignIn = () => {
                 if (userCredential.user.metadata.createdAt === userCredential.user.metadata.lastLoginAt) {
                     navigate('/login');
                 } else (
-                    navigate('/dashboard/tracking')
+                    setUser(true),
+                    window.localStorage.setItem('user', JSON.stringify(user)),
+                    navigate('/dashboard/tracking'),
+                    setUser(true)
                 )
             })
             .catch((error) => {
@@ -24,8 +29,20 @@ const SignIn = () => {
             })
     }
 
+    useEffect(() => {
+        const data = window.localStorage.getItem('user')
+        if (data !== null) setUser(JSON.parse(data))
+    }, [setUser])
+
+    // useEffect(() => {
+    //     console.log(user);
+    //     window.localStorage.setItem('user', JSON.stringify(user))
+    // }, [user]);
+
     const userSignOut = () => {
         signOut(Auth).then(() => {
+            setUser(false),
+                localStorage.setItem('user', user),
             console.log('sign out successfully');
         })
     }
