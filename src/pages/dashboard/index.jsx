@@ -15,8 +15,8 @@ const Dashboard = () => {
 
     return (<>
     <div className='overflow-hidden h-[100vh]'>
-            <div className="grid grid-cols-12">
-                <div className="col-span- min-h-screen">
+            <div className="flex flex-col">
+                <div className="">
                     <SideNav />
                 </div>
                 <div className="col-span-11 max-h-screen overflow-y-auto">

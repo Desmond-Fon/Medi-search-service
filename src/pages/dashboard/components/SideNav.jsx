@@ -1,22 +1,23 @@
 import avatar from '../../../assets/avatar.png'
-import { NavLink, Link } from 'react-router-dom';
-import { useState } from 'react';
+import logo from '../../../assets/logo.png'
+import { Link } from 'react-router-dom';
+// import { useState } from 'react';
 
 
 
 const SideNav = () => {
-    const [active, setActive] = useState(false)
+    // const [active, setActive] = useState(false)
 
-    const navLinkStyle = ({ isActive }) => {
-        isActive ? setActive(true) : setActive(false)
-        return {
-            backgroundColor: isActive ? '#4762FF' : '',
-            color: isActive ? 'white' : '',
-        };
-    };
+    // const navLinkStyle = ({ isActive }) => {
+    //     isActive ? setActive(true) : setActive(false)
+    //     return {
+    //         backgroundColor: isActive ? '#4762FF' : '',
+    //         color: isActive ? 'white' : '',
+    //     };
+    // };
     return (<>
-        <div className='bg-white h-screen pt-[120px] pb-[100px] px-[10px] flex flex-col justify-between gap-[35px] items-center text-black text-[16px] shadoww '>
-            <div className='flex flex-col items-center gap-9'>
+        <div className='bg-white h-[80px] px-[10px] flex justify-between gap-[35px] items-center text-black text-[16px] shadoww w-full'>
+            {/* <div className='flex flex-col items-center gap-9'>
 
                 <NavLink style={navLinkStyle} to='/dashboard/overview' className='p-3 rounded-[8px]'><div><svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="element-2 1">
@@ -40,9 +41,10 @@ const SideNav = () => {
                     </g>
                 </svg></div></NavLink>
 
-            </div>
-            <div>
-                <Link><img src={avatar} alt="" className='' /></Link>
+            </div> */}
+            <div className='flex justify-between w-full items-center'>
+                <Link to='/' className='pl-[50px]'><img src={logo} alt="" className='' /></Link>
+                <Link className='pr-[80px]'><img src={avatar} alt="" className='' /></Link>
             </div>
 
         </div>

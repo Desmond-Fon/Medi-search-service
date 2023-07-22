@@ -31,7 +31,7 @@ const Home = () => {
     console.log(userLocation);
 
     return (<>
-        <div className=' bg-hero h-screen bg-opacity-5'>
+        <div className=' bg-hero h-screen bg-opacity-5 '>
             <Nav />
             <div className="flex justify-between px-[120px] mt-[50px]">
                 <div className="flex flex-col items-start mt-[30px]  p-10 bg-opacity-5 bg-white">

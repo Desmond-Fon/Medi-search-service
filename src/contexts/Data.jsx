@@ -8,8 +8,9 @@ export function DataProvider({ children }) {
     const [hospitals, setHospitals] = useState([]);
     const [show, setShow] = useState(false)
     const [data, setData] = useState(null)
+    const [user, setUser] = useState(false,)
 
 
-    return <DataContext.Provider value={{ userLocation, setUserLocation, hospitals, setHospitals, show, setShow, data, setData }}
+    return <DataContext.Provider value={{ userLocation, setUserLocation, hospitals, setHospitals, show, setShow, data, setData, user, setUser}}
     >{children}</DataContext.Provider>;
 }

@@ -42,7 +42,7 @@ const Tracking = () => {
 
     return (<>
         <div className="flex w-full  relative overflow-x-hidden">
-            {<div className={`absolute bg-white h-[100vh] flex justify-start items-center flex-col pt-[30px] px-[30px] bg-opacity-30 -translate-x-0 ${!show && "-translate-x-[150%]"} z-40 transition duration-300 ease-in-out`}>
+            {<div className={`absolute bg-white h-[100vh] flex justify-start items-center flex-col pt-[30px] px-[10px] bg-opacity-60 -translate-x-0 ${!show && "-translate-x-[150%]"} z-40 transition duration-300 ease-in-out`}>
 
                 <div className='flex justify-end w-full' onClick={handleClose}>
                     <div className='bg-white h-5 w-5 rounded-full text-center flex justify-center items-center mb-[20px] pb-[2px] cursor-pointer transition-all duration-1000'>x</div>
@@ -53,30 +53,30 @@ const Tracking = () => {
                     <img src={settings} alt="" className='absolute top-2 right-3 h-4' />
                 </div> */}
 
-                <div className='flex w-full mt-[20px] mb-[16px]'>
+                <div className='flex w-[90%] mt-[20px] mb-[16px]'>
                     <p className='text-left font-[700] text-[16px]'>Selected Location</p>
                 </div>
 
-                <div className='details w-full p-4'>
+                <div className='details w-[90%] p-4'>
                     <div className='flex justify-between items-center'>
                         <div>
                             <p className='text-[#B0B0B0] font-[600] text-[12px]'>Healthcare facility</p>
                             <p className='font-[700] text-[16px] w-[200px]'>{data?.tags.name}</p>
                         </div>
-                        <div><img src={hospital} alt="" /></div>
+                        <div><img src={hospital} alt="" className='' /></div>
                     </div>
                     <div className='bg-[#ECECEC] h-[1px] w-full mt-[15px] mb-[20px]'></div>
                     <div className='flex flex-col'>
                         <div className='flex justify-start gap-3 items-center'>
-                            <img src={locationn} alt="" />
+                            <img src={locationn} alt="" className='h-[30px]' />
                             <div>
                                 <p className='font-[700] text-[14px]'>My location</p>
                                 <p className='font-[400] text-[10px] text-[#B0B0B0]'>{data?.tags['addr:city']} </p>
                             </div>
                         </div>
-                        <div className=' w-[1px] h-full ml-[17px] border-dashed border-[#E3E3E3] border-[1px] text-white'>.</div>
+                        <div className=' w-[1px] h-full ml-[13px] border-dashed border-[#E3E3E3] border-[1px] text-white'>.</div>
                         <div className='flex justify-start gap-3 items-center'>
-                            <img src={boldMap} alt="" />
+                            <img src={boldMap} alt="" className='h-[30px]' />
                             <div>
                                 <p className='font-[700] text-[14px]'>{data?.tags.name} </p>
                                 <p className='font-[400] text-[10px] text-[#B0B0B0]'>{data?.tags['addr:street']} </p>
@@ -91,9 +91,9 @@ const Tracking = () => {
                             <p className='font-[700] text-[14px]'>{data?.tags.name}</p>
                             <p className='text-[#484A58] font-[600] text-[12px]'>{data?.tags['addr:street']}</p>
                         </div>
-                        <div className='flex items-center gap-4'>
-                            <div><img src={call} alt="" /></div>
-                            <div><img src={message} alt="" /></div>
+                        <div className='flex items-center gap-2'>
+                            <div><img src={call} alt="" className='w-[70%]' /></div>
+                            <div><img src={message} alt="" className='w-[70%]' /></div>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ import { DataContext } from '../../../../contexts/Data';
 
 
 // eslint-disable-next-line react/prop-types
-const AnyReactComponent = ({ text }) => <div><img src={locationn} alt='' className='h-7' /><p className='text-bold text-green-400 text-[14px] bg-white w-fit px-2 py-1 rounded-md'>{text}</p></div>;
+const AnyReactComponent = () => <div><img src={locationn} alt='' className='h-7' /><div className='my-2 text-bold text-[#232323] text-[13px] bg-white w-[150px] px-2 py-2 rounded-md font-bold flex justify-around items-center'><img src={locationn} alt='' className='h-5' /><p> My Location </p></div></div>;
 // eslint-disable-next-line react/prop-types
 
 
@@ -20,12 +20,7 @@ export default function SimpleMap() {
     const [hospitals, setHospitals] = useState(null)
 
 
-
-    // console.log(isHovering)
-
     let location = JSON.parse(localStorage.getItem('userLocation'));
-    // console.log(location);
-    // console.log(localStorage.getItem('userLocation'));
 
     const defaultProps = {
         center: {
@@ -72,7 +67,7 @@ export default function SimpleMap() {
                 <AnyReactComponent
                     lat={userLocation?.latitude}
                     lng={userLocation?.longitude}
-                    text={'My Location'}
+                    // text={'My Location'}
                 />
                 {hospitals && hospitals.map((hospital) => (
                     <HospitalComponent
@@ -80,17 +75,18 @@ export default function SimpleMap() {
                         lat={hospital.lat}
                         lng={hospital.lon}
                         text={hospital.tags.name}
+                        location={hospital.tags['addr:city']}
                         hospital={hospital}
-                        />
+                    />
                 ))}
             </GoogleMapReact>
         </div>
     );
 }
 
-const HospitalComponent = ({ text, hospital }) => {
+const HospitalComponent = ({ text, hospital, location }) => {
     const [isHovering, setIsHovering] = useState(false);
-    const { setShow, setData} = useContext(DataContext);
+    const { setShow, setData } = useContext(DataContext);
 
     const handleMouseOver = () => {
         // console.log('mouse over');
@@ -116,6 +112,12 @@ const HospitalComponent = ({ text, hospital }) => {
         }>
             <img src={boldMap} alt='' className='h-5 cursor-pointer' onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut} />
-        </div> {isHovering ? (<p className='text-bold text-blue-500 text-[12px] bg-white w-fit px-2 py-1 rounded-md'>{text}</p>) : ''}
+        </div> {isHovering ? (<div className='my-2 text-bold text-[#232323] text-[13px] bg-white w-[150px] px-2 py-2 rounded-md font-bold flex justify-around items-center'>
+            <img src={boldMap} alt='' className='h-5 cursor-pointer' />
+            <div>
+                <p className='break-normal'>{text}</p>
+                <p className='font-normal text-[#B0B0B0] text-[12px]'>{location}</p>
+            </div>
+            </div>) : ''}
     </div>)
 }
