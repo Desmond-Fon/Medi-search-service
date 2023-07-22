@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Auth } from "../../../firebase";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
@@ -17,27 +17,19 @@ const SignIn = () => {
                 console.log(userCredential);
                 if (userCredential.user.metadata.createdAt === userCredential.user.metadata.lastLoginAt) {
                     navigate('/login');
-                } else (
-                    setUser(true),
-                    window.localStorage.setItem('user', JSON.stringify(user)),
-                    navigate('/dashboard/tracking'),
+                } else {
                     setUser(true)
-                )
+                    console.log(user)
+                    window.localStorage.setItem('user', 'true')
+                    navigate('/dashboard/tracking')
+                    setUser(true)
+                }
             })
             .catch((error) => {
                 console.log(error);
             })
     }
 
-    useEffect(() => {
-        const data = window.localStorage.getItem('user')
-        if (data !== null) setUser(JSON.parse(data))
-    }, [setUser])
-
-    // useEffect(() => {
-    //     console.log(user);
-    //     window.localStorage.setItem('user', JSON.stringify(user))
-    // }, [user]);
 
     const userSignOut = () => {
         signOut(Auth).then(() => {

@@ -15,15 +15,15 @@ const Nav = () => {
         if (data !== null) setUser(JSON.parse(data))
     }, [setUser])
 
-    useEffect(() => {
-        window.localStorage.setItem('loggedIn', JSON.stringify(user))
-    }, [user]);
+    // useEffect(() => {
+    //     window.localStorage.setItem('user', JSON.stringify(user))
+    // }, [user]);
 
     const userSignOut = () => {
         signOut(Auth).then(() => {
-            setUser(false),
-                localStorage.setItem('user', user),
-                console.log('sign out successfully');
+            setUser(false)
+                localStorage.setItem('user', 'false')
+                // console.log('sign out successfully');
         })
     }
 
@@ -41,10 +41,10 @@ const Nav = () => {
         </div>
         <div>
             {user ? <div className='flex items-ccenter gap-3'>
-                <button className='px-[22px] py-[7px] rounded-[5px] bg-[#4762FF] text-white'><Link to='/dashboard/tracking'>Dashboard</Link></button> <button
+                <Link to='/dashboard/tracking'><button className='px-[22px] py-[7px] rounded-[5px] bg-[#4762FF] text-white'>Dashboard</button></Link> <button
                     className='px-[22px] py-[7px] rounded-[5px] bg-[#4762FF] text-white whitespace-nowrap'
                     onClick={userSignOut}>Sign Out
-                </button></div> : <button className='px-[22px] py-[7px] rounded-[5px] bg-[#4762FF] text-white'><Link to='/login'>Login</Link></button>}
+                </button></div> : <Link to='/login'><button className='px-[22px] py-[7px] rounded-[5px] bg-[#4762FF] text-white'>Login</button></Link>}
         </div>
     </div>);
 }
