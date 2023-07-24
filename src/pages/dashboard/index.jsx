@@ -1,19 +1,19 @@
 import { Outlet } from "react-router-dom";
 import SideNav from "./components/SideNav";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const active = JSON.parse(localStorage.getItem('user'))
-      useEffect(() => {
-          !active && navigate('/')
-    }, [active, navigate])
+    // const active = JSON.parse(localStorage.getItem('user'))
+    //   useEffect(() => {
+    //       !active && navigate('/')
+    // }, [active, navigate])
 
 
     return (<>
-   {active && <div className='overflow-hidden h-[100vh]'>
+   <div className='overflow-hidden h-[100vh]'>
             <div className="flex flex-col">
                 <div className="">
                     <SideNav />
@@ -22,7 +22,7 @@ const Dashboard = () => {
                     <Outlet />
                 </div>
             </div>
-        </div>}
+        </div>
     </>);
 }
 
