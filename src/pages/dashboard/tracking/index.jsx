@@ -42,7 +42,7 @@ const Tracking = () => {
 
     return (<>
         <div className="flex w-full  relative overflow-x-hidden">
-            {<div className={`absolute bg-white h-[100vh] flex justify-start items-center flex-col pt-[30px] px-[10px] bg-opacity-60 -translate-x-0 ${!show && "-translate-x-[150%]"} z-40 transition duration-300 ease-in-out`}>
+            {<div className={`absolute h-[100vh] flex justify-start items-center flex-col pt-[30px] px-[10px] -translate-x-0 ${!show && "-translate-x-[150%]"} z-40 transition duration-300 ease-in-out max-w-[400px]`}>
 
                 <div className='flex justify-end w-full' onClick={handleClose}>
                     <div className='bg-white h-5 w-5 rounded-full text-center flex justify-center items-center mb-[20px] pb-[2px] cursor-pointer transition-all duration-1000'>x</div>
@@ -53,9 +53,9 @@ const Tracking = () => {
                     <img src={settings} alt="" className='absolute top-2 right-3 h-4' />
                 </div> */}
 
-                <div className='flex w-[90%] mt-[20px] mb-[16px]'>
+                {/* <div className='flex w-[90%] mt-[20px] mb-[16px]'>
                     <p className='text-left font-[700] text-[16px]'>Selected Location</p>
-                </div>
+                </div> */}
 
                 <div className='details w-[90%] p-4'>
                     <div className='flex justify-between items-center'>
