@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-// import React from "react";
 import GoogleMapReact from 'google-map-react';
 import boldMap from '../../../../assets/boldMap.svg'
-// import message from '../../../../assets/Messages.png'
 import locationn from '../../../../assets/locationn.svg'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { DataContext } from '../../../../contexts/Data';
+
+const api_key = import.meta.env.VITE_API_KEY;
 
 
 // eslint-disable-next-line react/prop-types
@@ -47,8 +47,6 @@ export default function SimpleMap() {
         }
     };
 
-    // console.log(hospitals)
-
     useEffect(() => {
         const userLatitude = location.latitude
         const userLongitude = location.longitude;
@@ -59,7 +57,7 @@ export default function SimpleMap() {
     return (
         <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" }}
+                bootstrapURLKeys={{ key: api_key }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
                 options={mapOptions}
@@ -67,7 +65,6 @@ export default function SimpleMap() {
                 <AnyReactComponent
                     lat={userLocation?.latitude}
                     lng={userLocation?.longitude}
-                    // text={'My Location'}
                 />
                 {hospitals && hospitals.map((hospital) => (
                     <HospitalComponent
@@ -89,22 +86,15 @@ const HospitalComponent = ({ text, hospital, location }) => {
     const { setShow, setData } = useContext(DataContext);
 
     const handleMouseOver = () => {
-        // console.log('mouse over');
         setIsHovering(true);
     };
 
     const handleShow = () => {
-        // console.log('click')
-        // console.log(hospital)
         setData(hospital)
         setShow(true)
     }
 
-    // console.log(show)
-    // console.log(data)
-
     const handleMouseOut = () => {
-        // console.log('mouse out');
         setIsHovering(false);
     };
     return (<div>

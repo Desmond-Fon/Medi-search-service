@@ -1,5 +1,4 @@
 import Nav from "../../components/Nav";
-// import map from '../../assets/mapp.png'
 import { DataContext } from "../../contexts/Data";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -12,8 +11,6 @@ const Home = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    // console.log("Latitude is :", position.coords.latitude);
-                    // console.log("Longitude is :", position.coords.longitude);
                     const { latitude, longitude } = position.coords;
                     setUserLocation({ latitude, longitude });
                     localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }))
@@ -28,8 +25,6 @@ const Home = () => {
     }, [setUserLocation]);
 
 
-    // console.log(userLocation);
-
     return (<>
         <div className=' bg-hero h-screen bg-opacity-5 '>
             <Nav />
@@ -42,7 +37,6 @@ const Home = () => {
 
                 </div>
                 <div>
-                    {/* <img src={map} alt="" /> */}
                 </div>
             </div>
         </div>
