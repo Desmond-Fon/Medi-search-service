@@ -31,7 +31,7 @@ const Nav = () => {
 
     return (<div className='bg-white custom-shadow flex justify-between px-[120px] h-[75px] items-center'>
         <div>
-            <Link to='/'><img src={logo} alt="" /> </Link>
+            <Link to='/'><h1 className='text-4xl font-bold  text-[#4762FF] tracking-widest'>PSHMLS</h1> </Link>
         </div>
         {/* <div>
             <ul className='flex justify-center items-center gap-[40px] text-[16px] font-[600] text-[#333]'>
